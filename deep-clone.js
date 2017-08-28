@@ -1,4 +1,5 @@
 
+;(function(){
 function eachPropertyIs(type, ...obj) {
     return obj.every(function (el) {
         return type === Object.prototype.toString.call(el)
@@ -20,7 +21,10 @@ function bothHave(prop, ...obj) {
     })
 }
 
-
+/**
+*@param src type of source object ({} or [])
+*before use this function you must to know root level type of source object
+*/
 var clone = function (src, obj) {
     function check(loopIndex) {
         if (isPrimitive(obj[loopIndex])) {
@@ -61,3 +65,10 @@ var clone = function (src, obj) {
     }
     return src;
 }
+/*
+*example of using this function
+*/
+
+var cloned = clone({}, obj);
+    console.log('test', JSON.stringify(cloned) === JSON.stringify(cloned))
+})()

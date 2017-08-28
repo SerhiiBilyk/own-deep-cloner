@@ -34,6 +34,9 @@ var clone = function (src, obj) {
             src[loopIndex] = {};      
             clone(src[loopIndex], obj[loopIndex])
         }
+        if (eachPropertyIs("[object Function]", obj[loopIndex])) {
+            src[loopIndex]=obj[loopIndex].bind(src)
+        }
         if (eachPropertyIs("[object Array]", obj[loopIndex])) {
             src[loopIndex] = [];
             obj[loopIndex].forEach(function (el, i) {
